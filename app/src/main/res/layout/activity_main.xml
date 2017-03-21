@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dip"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_custom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:background="@color/colorPrimary"
+            android:text="Use custom layout"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_translucent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="Translucent"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="ToolBar"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_form_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="Form"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+    </LinearLayout>
+</ScrollView>
