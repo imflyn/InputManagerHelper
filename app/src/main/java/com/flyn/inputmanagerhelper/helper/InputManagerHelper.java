@@ -132,17 +132,37 @@ public class InputManagerHelper {
         return false;
     }
 
-    public void bindScrollView(final ScrollView layout_keyboard, final View view) {
-        layout_keyboard.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+    public void bindScrollView(final ScrollView scrollView) {
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        adjustLayout(layout_keyboard, view);
+                        scroll(scrollView);
                     }
                 }, 100);
             }
         });
+    }
+
+    private void scroll(final ScrollView scrollView) {
+        Rect r = new Rect();
+        scrollView.getWindowVisibleDisplayFrame(r);
+        //获得屏幕高度
+        int screenHeight = scrollView.getRootView().getHeight();
+        //r.bottom - r.top计算出输入法弹起后viewGroup的高度，屏幕高度-viewGroup高度即为键盘高度
+        int keyboardHeight = screenHeight - (r.bottom - r.top);
+        //当设置layout_keyboard设置完padding以后会重绘布局再次执行onGlobalLayout()
+        //所以判断如果键盘高度未改变就不执行下去
+        if (keyboardHeight == lastKeyBoardHeight) {
+            return;
+        }
+        lastKeyBoardHeight = keyboardHeight;
+        if (keyboardHeight > 300) {
+            Rect rect = new Rect();
+            activity.getWindow().getCurrentFocus().getWindowVisibleDisplayFrame(rect);
+            scrollView.smoothScrollTo(0, rect.bottom);
+        }
     }
 }
