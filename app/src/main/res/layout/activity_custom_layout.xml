@@ -80,18 +80,21 @@
                 android:background="@color/dividerColor" />
         </RelativeLayout>
 
-
-        <Button
-            android:id="@+id/tv_login"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="48dip"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="36dip"
             android:layout_marginStart="36dip"
-            android:layout_marginTop="24dip"
-            android:background="@color/colorPrimary"
-            android:text="登录"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:layout_marginTop="24dip">
 
+            <Button
+                android:id="@+id/tv_login"
+                android:layout_width="match_parent"
+                android:layout_height="48dip"
+                android:background="@color/colorPrimary"
+                android:text="登录"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </FrameLayout>
     </LinearLayout>
 </com.flyn.inputmanagerhelper.view.KeyboardListenLayout>

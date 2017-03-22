@@ -22,6 +22,17 @@
             android:textSize="12dp" />
 
         <Button
+            android:id="@+id/btn_custom_layout_with_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="Use custom layout with toolbar"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
             android:id="@+id/btn_translucent_layout"
             android:layout_width="match_parent"
             android:layout_height="48dip"
@@ -39,6 +50,17 @@
             android:layout_marginTop="16dip"
             android:background="@color/colorPrimary"
             android:text="ToolBar"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_actionBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="ActionBar"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="12dp" />

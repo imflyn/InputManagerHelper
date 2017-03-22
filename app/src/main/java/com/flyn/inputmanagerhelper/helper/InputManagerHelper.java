@@ -6,11 +6,13 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ScrollView;
 
 import com.flyn.inputmanagerhelper.R;
@@ -43,10 +45,20 @@ public class InputManagerHelper {
                             // 计算出输入法的高度
                             //oldh-输入法高度即为键盘最顶端的在布局中的位置
                             int keyboardTop = oldh - (oldh - h);
+                            int[] location = new int[2];
+                            lastVisibleView.getLocationOnScreen(location);
+                            //获取登录按钮底部在屏幕中的位置
+                            int lastVisibleViewBottom = location[1];
                             //登录按钮底部在布局中的位置-输入法顶部的位置=需要将布局弹起多少高度
-                            int reSizeLayoutHeight = lastVisibleView.getBottom() - keyboardTop;
+                            int reSizeLayoutHeight = lastVisibleViewBottom - keyboardTop;
+                            //需要多弹起一个StatusBar的高度
+                            reSizeLayoutHeight += getStatusBarHeight();
+                            if (null != (((AppCompatActivity) activity).getSupportActionBar()) && (((AppCompatActivity) activity).getSupportActionBar()).isShowing()) {
+                                //如果界面里有actionbar则需要少弹起一个actionbar的高度
+                                reSizeLayoutHeight -= getActionBarHeight();
+                            }
                             //设置登录按钮与输入法之间存有间距
-                            reSizeLayoutHeight = reSizeLayoutHeight + getPxFromDp(8);
+                            reSizeLayoutHeight += getPxFromDp(8);
                             keyboardListenLayout.setPadding(0, -reSizeLayoutHeight, 0, 0);
                         } else {
                             //还原布局
@@ -91,20 +103,14 @@ public class InputManagerHelper {
         } else {
             //计算出键盘最顶端在布局中的位置
             int keyboardTop = screenHeight - keyboardHeight;
+            int[] location = new int[2];
+            lastVisibleView.getLocationOnScreen(location);
+            //获取登录按钮底部在屏幕中的位置
+            int lastVisibleViewBottom = location[1];
             //登录按钮底部在布局中的位置-输入法顶部的位置=需要将布局弹起多少高度
-            int reSizeLayoutHeight = lastVisibleView.getBottom() - keyboardTop;
-            //计算actionBar的高度
-            if (null != (((AppCompatActivity) activity).getSupportActionBar())) {
-                //如果界面里有actionbar则需要多向上弹起一个actionbar的高度
-                TypedValue typedValue = new TypedValue();
-                if (activity.getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true)) {
-                    int actionBarHeight = TypedValue.complexToDimensionPixelSize(typedValue.data, activity.getResources().getDisplayMetrics());
-                    reSizeLayoutHeight += actionBarHeight;
-                }
-            } else if (isTranslucentStatusBar()) {
-                //如果界面是全屏的，需要少弹起一个状态栏的高度
-                reSizeLayoutHeight -= getStatusBarHeight();
-            }
+            int reSizeLayoutHeight = lastVisibleViewBottom - keyboardTop;
+            //需要多弹起一个StatusBar的高度
+            reSizeLayoutHeight += getStatusBarHeight();
             //设置登录按钮与输入法之间存有间距
             reSizeLayoutHeight += getPxFromDp(8);
             viewGroup.setPadding(0, -reSizeLayoutHeight, 0, 0);
@@ -122,6 +128,17 @@ public class InputManagerHelper {
             result = activity.getResources().getDimensionPixelOffset(resId);
         }
         return result;
+    }
+
+    private int getActionBarHeight() {
+        if (null != (((AppCompatActivity) activity).getSupportActionBar())) {
+            //如果界面里有actionbar则需要多向上弹起一个actionbar的高度
+            TypedValue typedValue = new TypedValue();
+            if (activity.getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true)) {
+                return TypedValue.complexToDimensionPixelSize(typedValue.data, activity.getResources().getDisplayMetrics());
+            }
+        }
+        return 0;
     }
 
     private boolean isTranslucentStatusBar() {
@@ -160,9 +177,15 @@ public class InputManagerHelper {
         }
         lastKeyBoardHeight = keyboardHeight;
         if (keyboardHeight > 300) {
-            Rect rect = new Rect();
-            activity.getWindow().getCurrentFocus().getWindowVisibleDisplayFrame(rect);
-            scrollView.smoothScrollTo(0, rect.bottom);
+            View view = activity.getWindow().getCurrentFocus();
+            int[] location = new int[2];
+            view.getLocationOnScreen(location);
+            if (view instanceof EditText) {
+                Log.i(getClass().getSimpleName(), "activity.getWindow().getCurrentFocus():" + ((EditText) view).getText());
+                Log.i(getClass().getSimpleName(), "rect.bottom:" + location[1]);
+            }
+            int height = location[1] - view.getHeight() - getPxFromDp(8);
+            scrollView.smoothScrollTo(0, height);
         }
     }
 }
