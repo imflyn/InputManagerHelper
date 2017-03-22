@@ -17,6 +17,7 @@ public class ToolBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toolbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("THis is toolbar");
         setSupportActionBar(toolbar);
         Button tv_login = (Button) findViewById(R.id.tv_login);
 

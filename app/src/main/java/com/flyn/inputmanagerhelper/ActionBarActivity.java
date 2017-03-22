@@ -16,6 +16,7 @@ public class ActionBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actionbar);
 //        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("This is actionbar");
         LinearLayout layout_keyboard = (LinearLayout) findViewById(R.id.layout_keyboard);
         Button tv_login = (Button) findViewById(R.id.tv_login);
 

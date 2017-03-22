@@ -17,6 +17,7 @@ public class CustomLayoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_custom_layout);
+        getSupportActionBar().setTitle("This is actionbar");
         KeyboardListenLayout keyboardListenLayout = (KeyboardListenLayout) findViewById(R.id.layout_keyboard);
         Button tv_login = (Button) findViewById(R.id.tv_login);
 
