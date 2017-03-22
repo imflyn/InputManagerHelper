@@ -8,7 +8,7 @@ import android.widget.ScrollView;
 
 import com.flyn.inputmanagerhelper.helper.InputManagerHelper;
 
-public class FormActivity extends AppCompatActivity {
+public class ScrollViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -3,7 +3,6 @@ package com.flyn.inputmanagerhelper.helper;
 
 import android.app.Activity;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -33,7 +32,7 @@ public class InputManagerHelper {
         return new InputManagerHelper(activity);
     }
 
-    public void bindCustomLayout(final KeyboardListenLayout keyboardListenLayout, final View lastVisibleView) {
+    public void bindCustomLayout(final KeyboardListenLayout keyboardListenLayout, final View lastVisibleView, final int offset) {
         keyboardListenLayout.setOnSizeChangedListener(new KeyboardListenLayout.onSizeChangedListener() {
             @Override
             public void onChanged(final boolean showKeyboard, final int h, final int oldh) {
@@ -57,8 +56,8 @@ public class InputManagerHelper {
                             if (null != (((AppCompatActivity) activity).getSupportActionBar()) && (((AppCompatActivity) activity).getSupportActionBar()).isShowing()) {
                                 reSizeLayoutHeight -= getActionBarHeight();
                             }
-                            //设置登录按钮与输入法之间8dp间距
-                            reSizeLayoutHeight += getPxFromDp(8);
+                            //设置登录按钮与输入法之间间距
+                            reSizeLayoutHeight += offset;
                             keyboardListenLayout.setPadding(0, -reSizeLayoutHeight, 0, 0);
                         } else {
                             //还原布局
@@ -70,21 +69,21 @@ public class InputManagerHelper {
         });
     }
 
-    public void bindLayout(final ViewGroup viewGroup, final View lastVisibleView) {
+    public void bindLayout(final ViewGroup viewGroup, final View lastVisibleView, final int offset) {
         viewGroup.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        adjustLayout(viewGroup, lastVisibleView);
+                        adjustLayout(viewGroup, lastVisibleView, offset);
                     }
                 }, 10);
             }
         });
     }
 
-    private void adjustLayout(ViewGroup viewGroup, View lastVisibleView) {
+    private void adjustLayout(ViewGroup viewGroup, View lastVisibleView, int offset) {
         //获得屏幕高度
         int screenHeight = viewGroup.getRootView().getHeight();
         //r.bottom - r.top计算出输入法弹起后viewGroup的高度，屏幕高度-viewGroup高度即为键盘高度
@@ -111,8 +110,8 @@ public class InputManagerHelper {
             int reSizeLayoutHeight = lastVisibleViewBottom - keyboardTop;
             //需要多弹起一个StatusBar的高度
             reSizeLayoutHeight -= getStatusBarHeight();
-            //设置登录按钮与输入法之间存有间距
-            reSizeLayoutHeight += getPxFromDp(8);
+            //设置登录按钮与输入法之间间距
+            reSizeLayoutHeight += offset;
             viewGroup.setPadding(0, -reSizeLayoutHeight, 0, 0);
         }
     }
@@ -182,11 +181,6 @@ public class InputManagerHelper {
         });
     }
 
-
-    private int getPxFromDp(float dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, activity.getResources().getDisplayMetrics());
-    }
-
     private int getStatusBarHeight() {
         int result = 0;
         int resId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -207,11 +201,4 @@ public class InputManagerHelper {
         return 0;
     }
 
-    private boolean isTranslucentStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int flag = activity.getWindow().getAttributes().flags;
-            return (flag & WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS) == WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        }
-        return false;
-    }
 }

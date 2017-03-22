@@ -71,7 +71,7 @@
             android:layout_height="48dip"
             android:layout_marginTop="16dip"
             android:background="@color/colorPrimary"
-            android:text="Form"
+            android:text="ScrollView"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="12dp" />
