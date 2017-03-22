@@ -3,6 +3,7 @@ package com.flyn.inputmanagerhelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btn_form_layout = (Button) findViewById(R.id.btn_form_layout);
         Button btn_toolbar = (Button) findViewById(R.id.btn_toolbar);
         Button btn_actionBar = (Button) findViewById(R.id.btn_actionBar);
+        Button btn_recycleview = (Button) findViewById(R.id.btn_recycleview);
 
 
         btn_custom_layout.setOnClickListener(this);
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_form_layout.setOnClickListener(this);
         btn_toolbar.setOnClickListener(this);
         btn_actionBar.setOnClickListener(this);
+        btn_recycleview.setOnClickListener(this);
     }
 
     @Override
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_form_layout:
                 intent.setClass(this, FormActivity.class);
+                break;
+            case R.id.btn_recycleview:
+                intent.setClass(this, RecyclerViewActivity.class);
                 break;
         }
         startActivity(intent);

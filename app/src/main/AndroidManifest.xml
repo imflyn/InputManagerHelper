@@ -27,6 +27,7 @@
             android:name=".TranslucentLayoutActivity"
             android:theme="@style/AppTheme.Translucent" />
         <activity android:name=".FormActivity" />
+        <activity android:name=".RecyclerViewActivity" />
     </application>
 
 </manifest>

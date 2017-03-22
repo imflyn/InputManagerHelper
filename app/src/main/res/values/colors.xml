@@ -9,4 +9,5 @@
     <color name="textColorPrimary">#333333</color>
     <color name="textColorSecondary">#666666</color>
     <color name="textColorSecondaryLight">#999999</color>
+    <color name="bg_grey">#D3D4D5</color>
 </resources>

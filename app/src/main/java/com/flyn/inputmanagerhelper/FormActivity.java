@@ -13,8 +13,8 @@ public class FormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        setContentView(R.layout.form_activity);
+//        getSupportActionBar().hide();
+        setContentView(R.layout.activity_form);
         ScrollView layout_keyboard = (ScrollView) findViewById(R.id.layout_keyboard);
         InputManagerHelper inputManagerHelper = InputManagerHelper.attachToActivity(this);
         inputManagerHelper.bindScrollView(layout_keyboard);

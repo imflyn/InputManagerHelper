@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,12 +131,12 @@ public class InputManagerHelper {
         });
     }
 
-    private void scroll(final ScrollView scrollView) {
+    private void scroll(final ViewGroup viewGroup) {
         //获得屏幕高度
-        int screenHeight = scrollView.getRootView().getHeight();
+        int screenHeight = viewGroup.getRootView().getHeight();
         //r.bottom - r.top计算出输入法弹起后viewGroup的高度，屏幕高度-viewGroup高度即为键盘高度
         Rect r = new Rect();
-        scrollView.getWindowVisibleDisplayFrame(r);
+        viewGroup.getWindowVisibleDisplayFrame(r);
         int keyboardHeight = screenHeight - (r.bottom - r.top);
         //当设置layout_keyboard设置完padding以后会重绘布局再次执行onGlobalLayout()
         //所以判断如果键盘高度未改变就不执行下去
@@ -155,12 +156,32 @@ public class InputManagerHelper {
                 //比较输入框与键盘的位置关系，如果输入框在键盘之上的位置就不做处理
                 if (viewBottom <= keyboardTop)
                     return;
-                //需要滚动的距离即为文字底部到输入框底部的距离
-                int height = (view.getHeight() - (int) ((TextView) view).getTextSize()) / 2;
-                scrollView.smoothScrollBy(0, height);
+                //需要滚动的距离即为输入框底部到键盘的距离
+                int reSizeLayoutHeight = viewBottom - keyboardTop;
+                reSizeLayoutHeight -= getStatusBarHeight();
+                if (viewGroup instanceof ScrollView) {
+                    ((ScrollView) viewGroup).smoothScrollBy(0, reSizeLayoutHeight);
+                } else if (viewGroup instanceof RecyclerView) {
+                    ((RecyclerView) viewGroup).smoothScrollBy(0, reSizeLayoutHeight);
+                }
             }
         }
     }
+
+    public void bindRecycleView(final RecyclerView recyclerView) {
+        recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroll(recyclerView);
+                    }
+                }, 10);
+            }
+        });
+    }
+
 
     private int getPxFromDp(float dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, activity.getResources().getDisplayMetrics());

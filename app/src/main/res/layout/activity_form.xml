@@ -409,7 +409,7 @@
             android:layout_marginStart="36dip"
             android:layout_marginTop="24dip"
             android:background="@color/colorPrimary"
-            android:text="登录"
+            android:text="提交"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
     </LinearLayout>
