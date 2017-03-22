@@ -20,8 +20,7 @@ public class CustomLayoutActivity extends AppCompatActivity {
         KeyboardListenLayout keyboardListenLayout = (KeyboardListenLayout) findViewById(R.id.layout_keyboard);
         Button tv_login = (Button) findViewById(R.id.tv_login);
 
-        InputManagerHelper inputManagerHelper = InputManagerHelper.attachToActivity(this);
-        inputManagerHelper.bindCustomLayout(keyboardListenLayout, tv_login, 16);
+        InputManagerHelper.attachToActivity(this).bindCustomLayout(keyboardListenLayout, tv_login, 16);
     }
 
 }
