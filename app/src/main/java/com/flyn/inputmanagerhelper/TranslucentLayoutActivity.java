@@ -20,7 +20,7 @@ public class TranslucentLayoutActivity extends AppCompatActivity {
         Button tv_login = (Button) findViewById(R.id.tv_login);
 
         InputManagerHelper inputManagerHelper = InputManagerHelper.attachToActivity(this);
-        inputManagerHelper.bindLayout(layout_keyboard, tv_login, 0);
+        inputManagerHelper.bindLayout(layout_keyboard, tv_login, 16);
     }
 
 }

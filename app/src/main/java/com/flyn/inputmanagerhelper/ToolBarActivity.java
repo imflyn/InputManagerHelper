@@ -21,7 +21,7 @@ public class ToolBarActivity extends AppCompatActivity {
         Button tv_login = (Button) findViewById(R.id.tv_login);
 
         InputManagerHelper inputManagerHelper = InputManagerHelper.attachToActivity(this);
-        inputManagerHelper.bindLayout((ViewGroup) findViewById(R.id.layout_keyboard), tv_login, 0);
+        inputManagerHelper.bindLayout((ViewGroup) findViewById(R.id.layout_keyboard), tv_login, 16);
     }
 
 }
