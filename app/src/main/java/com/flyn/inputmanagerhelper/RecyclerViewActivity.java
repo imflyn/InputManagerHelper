@@ -32,7 +32,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
             data.add(String.valueOf(i + 1));
         }
         adapter.setData(data);
-        InputManagerHelper.attachToActivity(this).bindRecycleView(recyclerView);
+        InputManagerHelper.attachToActivity(this).bind(recyclerView).offset(100);
+//        InputManagerHelper.attachToActivity(this).bind(recyclerView);
     }
 
 

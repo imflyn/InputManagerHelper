@@ -20,7 +20,7 @@ public class ToolBarActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Button tv_login = (Button) findViewById(R.id.tv_login);
 
-        InputManagerHelper.attachToActivity(this).bindLayout((ViewGroup) findViewById(R.id.layout_keyboard), tv_login, 16);
+        InputManagerHelper.attachToActivity(this).bind((ViewGroup) findViewById(R.id.layout_keyboard), tv_login).offset(16);
     }
 
 }

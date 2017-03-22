@@ -19,7 +19,7 @@ public class ActionBarActivity extends AppCompatActivity {
         LinearLayout layout_keyboard = (LinearLayout) findViewById(R.id.layout_keyboard);
         Button tv_login = (Button) findViewById(R.id.tv_login);
 
-        InputManagerHelper.attachToActivity(this).bindLayout(layout_keyboard, tv_login, 16);
+        InputManagerHelper.attachToActivity(this).bind(layout_keyboard, tv_login).offset(16);
     }
 
 }

@@ -16,7 +16,8 @@ public class ScrollViewActivity extends AppCompatActivity {
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_form);
         ScrollView layout_keyboard = (ScrollView) findViewById(R.id.layout_keyboard);
-        InputManagerHelper.attachToActivity(this).bindScrollView(layout_keyboard);
+//        InputManagerHelper.attachToActivity(this).bind(layout_keyboard);
+        InputManagerHelper.attachToActivity(this).bind(layout_keyboard).offset(16);
     }
 
 
