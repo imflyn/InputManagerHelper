@@ -79,7 +79,7 @@
     <Button
         android:id="@+id/tv_login"
         android:layout_width="match_parent"
-        android:layout_height="48dip"
+        android:layout_height="77dip"
         android:layout_marginEnd="36dip"
         android:layout_marginStart="36dip"
         android:layout_marginTop="24dip"

@@ -90,7 +90,7 @@
             <Button
                 android:id="@+id/tv_login"
                 android:layout_width="match_parent"
-                android:layout_height="48dip"
+                android:layout_height="70dip"
                 android:background="@color/colorPrimary"
                 android:text="登录"
                 android:textColor="@android:color/white"
