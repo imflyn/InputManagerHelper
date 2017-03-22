@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CustomLayoutActivity" />
+        <activity android:name=".CustomLayoutActivity"
+            />
         <activity
             android:name=".CustomLayoutWithToolBarActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

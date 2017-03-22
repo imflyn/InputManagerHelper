@@ -69,7 +69,7 @@ public class InputManagerHelper {
                         }
                         if (showKeyboard) {
                             //oldh代表输入法未弹出前最外层布局高度，h代表当前最外层布局高度，oldh-h可以计算出布局大小改变后输入法的高度
-                            //oldh-输入法高度即为键盘最顶端处在布局中的位置，其实直接用h计算就可以，代码这么写便于理解
+                            //整个布局的高度-输入法高度=键盘最顶端处在布局中的位置，其实直接用h计算就可以，代码这么写为了便于理解
                             int keyboardTop = oldh - (oldh - h);
                             int[] location = new int[2];
                             lastVisibleView.getLocationOnScreen(location);
