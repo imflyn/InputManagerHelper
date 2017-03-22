@@ -56,13 +56,17 @@ public class InputManagerHelper {
         return this;
     }
 
-    private void bindKeyboardListenLayout(final KeyboardListenLayout keyboardListenLayout, final View lastVisibleView) {
+    private void bindKeyboardListenLayout(final KeyboardListenLayout keyboardListenLayout, final View view) {
         keyboardListenLayout.setOnSizeChangedListener(new KeyboardListenLayout.onSizeChangedListener() {
             @Override
             public void onChanged(final boolean showKeyboard, final int h, final int oldh) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        View lastVisibleView = view;
+                        if (lastVisibleView == null) {
+                            lastVisibleView = activity.getCurrentFocus();
+                        }
                         if (showKeyboard) {
                             //oldh代表输入法未弹出前最外层布局高度，h代表当前最外层布局高度，oldh-h可以计算出布局大小改变后输入法的高度
                             //oldh-输入法高度即为键盘最顶端处在布局中的位置，其实直接用h计算就可以，代码这么写便于理解
@@ -82,7 +86,8 @@ public class InputManagerHelper {
                             }
                             //设置登录按钮与输入法之间间距
                             reSizeLayoutHeight += offset;
-                            keyboardListenLayout.setPadding(0, -reSizeLayoutHeight, 0, 0);
+                            if (reSizeLayoutHeight > 0)
+                                keyboardListenLayout.setPadding(0, -reSizeLayoutHeight, 0, 0);
                         } else {
                             //还原布局
                             keyboardListenLayout.setPadding(0, 0, 0, 0);
@@ -93,13 +98,18 @@ public class InputManagerHelper {
         });
     }
 
-    private void bindLayout(final ViewGroup viewGroup, final View lastVisibleView) {
+    private void bindLayout(final ViewGroup viewGroup, final View view) {
         viewGroup.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void run() { //获得屏幕高度
+                    public void run() {
+                        View lastVisibleView = view;
+                        if (lastVisibleView == null) {
+                            lastVisibleView = activity.getCurrentFocus();
+                        }
+                        //获得屏幕高度
                         int screenHeight = viewGroup.getRootView().getHeight();
                         //r.bottom - r.top计算出输入法弹起后viewGroup的高度，屏幕高度-viewGroup高度即为键盘高度
                         Rect r = new Rect();
@@ -127,7 +137,8 @@ public class InputManagerHelper {
                             reSizeLayoutHeight -= getStatusBarHeight();
                             //设置登录按钮与输入法之间间距
                             reSizeLayoutHeight += offset;
-                            viewGroup.setPadding(0, -reSizeLayoutHeight, 0, 0);
+                            if (reSizeLayoutHeight > 0)
+                                viewGroup.setPadding(0, -reSizeLayoutHeight, 0, 0);
                         }
                     }
                 }, 50);
