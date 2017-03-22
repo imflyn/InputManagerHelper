@@ -25,7 +25,6 @@
                 android:layout_marginStart="8dip"
                 android:background="@null"
                 android:imeOptions="actionNext"
-                android:inputType="number"
                 android:text="1"
                 android:textColor="@color/textColorPrimary"
                 android:textSize="14sp" />
