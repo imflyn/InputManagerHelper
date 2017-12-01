@@ -17,8 +17,8 @@ public class ActionBarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_actionbar);
 //        getSupportActionBar().hide();
         getSupportActionBar().setTitle("This is actionbar");
-        LinearLayout layout_keyboard = (LinearLayout) findViewById(R.id.layout_keyboard);
-        Button tv_login = (Button) findViewById(R.id.tv_login);
+        LinearLayout layout_keyboard = findViewById(R.id.layout_keyboard);
+        Button tv_login = findViewById(R.id.tv_login);
 
         InputManagerHelper.attachToActivity(this).bind(layout_keyboard, tv_login).offset(16);
     }

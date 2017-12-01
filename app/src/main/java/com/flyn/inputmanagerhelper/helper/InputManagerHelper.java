@@ -137,8 +137,9 @@ public class InputManagerHelper {
                             reSizeLayoutHeight -= getStatusBarHeight();
                             //设置登录按钮与输入法之间间距
                             reSizeLayoutHeight += offset;
-                            if (reSizeLayoutHeight > 0)
+                            if (reSizeLayoutHeight > 0) {
                                 viewGroup.setPadding(0, -reSizeLayoutHeight, 0, 0);
+                            }
                         }
                     }
                 }, 50);

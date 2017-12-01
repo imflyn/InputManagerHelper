@@ -12,13 +12,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btn_custom_layout = (Button) findViewById(R.id.btn_custom_layout);
-        Button btn_custom_layout_with_toolbar = (Button) findViewById(R.id.btn_custom_layout_with_toolbar);
-        Button btn_translucent_layout = (Button) findViewById(R.id.btn_translucent_layout);
-        Button btn_form_layout = (Button) findViewById(R.id.btn_form_layout);
-        Button btn_toolbar = (Button) findViewById(R.id.btn_toolbar);
-        Button btn_actionBar = (Button) findViewById(R.id.btn_actionBar);
-        Button btn_recycleview = (Button) findViewById(R.id.btn_recycleview);
+        Button btn_custom_layout = findViewById(R.id.btn_custom_layout);
+        Button btn_custom_layout_with_toolbar = findViewById(R.id.btn_custom_layout_with_toolbar);
+        Button btn_translucent_layout = findViewById(R.id.btn_translucent_layout);
+        Button btn_form_layout = findViewById(R.id.btn_form_layout);
+        Button btn_toolbar = findViewById(R.id.btn_toolbar);
+        Button btn_actionBar = findViewById(R.id.btn_actionBar);
+        Button btn_recycleview = findViewById(R.id.btn_recycleview);
 
 
         btn_custom_layout.setOnClickListener(this);

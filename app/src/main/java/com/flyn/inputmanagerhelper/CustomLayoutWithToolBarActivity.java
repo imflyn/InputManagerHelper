@@ -16,11 +16,11 @@ public class CustomLayoutWithToolBarActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_layout_with_toolbar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("THis is toolbar");
         setSupportActionBar(toolbar);
-        KeyboardListenLayout keyboardListenLayout = (KeyboardListenLayout) findViewById(R.id.layout_keyboard);
-        Button tv_login = (Button) findViewById(R.id.tv_login);
+        KeyboardListenLayout keyboardListenLayout = findViewById(R.id.layout_keyboard);
+        Button tv_login = findViewById(R.id.tv_login);
 
         InputManagerHelper.attachToActivity(this).bind(keyboardListenLayout, tv_login).offset(16);
     }
